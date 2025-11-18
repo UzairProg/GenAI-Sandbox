@@ -1,0 +1,73 @@
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+$RECYCLE.BIN/
+
+# Windows PowerShell history
+ConsoleHost_history.txt
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+coverage.xml
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnp.*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Secrets and environment
+.env.local
+.env.*
+.secret
+secrets.json
+
+# Misc
+*.zip
+*.tar.gz
+*.egg
+
+# JetBrains
+.idea/
+
+# Local config
+local.settings.json
+
+# Ignore compiled artifacts
+*.class
+*.o
+*.so
+
+# Ignore any IDE or system files not listed above
+
