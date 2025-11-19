@@ -25,4 +25,6 @@ now this [100264, 9125, 198, 2675, 527, 264, 11190, 18328, 100265, 198, 100264, 
 ***Important:***
 this ids what the model actually processes. this ids will be passed to the transformer model. and this model will predict the next token id based on the previous token ids.
 
+[........, 100264, 78191, 198] -> model -> [........, 100264, 78191, 198, ***89023***]
+
 For more details on how tokens work and why they matter, see the [Tokenization](./tokenization.md) page.
