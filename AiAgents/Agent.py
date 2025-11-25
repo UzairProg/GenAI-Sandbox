@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import os
 import json
 import requests
+from pydantic import BaseModel, Field
+from typing import Optional
 
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
@@ -26,6 +28,13 @@ def get_weather(city):
 available_tools = {
     "get_weather": get_weather
 }
+
+class MyOutputFormat(BaseModel):
+    STEP: str = Field(..., description="The current step in the reasoning process")
+    CONTENT: Optional[str] = Field(None, description="The content of the response or thought")
+    TOOL: Optional[str] = Field(None, description="The tool being used, if applicable")
+    INPUT: Optional[str] = Field(None, description="The input to the tool, if applicable")
+    OUTPUT: Optional[str] = Field(None, description="The output from the tool, if applicable")
 
 SYSTEM_PROMPT = '''
 you are a advanced AI model that excels answering user queries.
@@ -98,9 +107,9 @@ message_history = [
         {"role": "user", "content": user_prompt}
     ]
 while True:
-    response = client.chat.completions.create(
+    response = client.chat.completions.parse(
         model="gemini-2.5-flash",
-        response_format={"type": "json_object"},
+        response_format=MyOutputFormat,
         messages=message_history
     )
 
