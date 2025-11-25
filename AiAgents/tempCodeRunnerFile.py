@@ -1,0 +1,1 @@
+https://wttr.in/{slug}?format=%25C+%25t
