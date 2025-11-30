@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
-pdf_path = Path(__file__).parent / "nodeJsNotes.pdf"
+pdf_path = Path(__file__).parent / "nodeJsNotes.pdf" # here, Path(__file__) gives the current file path i.e. RAG/main.py.. so its parent is RAG/ .. and then we append nodeJsNotes.pdf to it.
 
 #load the pdf in the python program
 loader = PyPDFLoader(file_path=pdf_path)
@@ -43,3 +43,13 @@ vector_store = QdrantVectorStore.from_documents(
 )
 
 print("indexing completed.")
+
+'''
+rn this code is sync in nature. it blocks further execution until indexing is done.
+and that's not how its done in production systems.
+
+in production systems, we use async processing and task queues.
+so we need to make it async and push the indexing tasks to a task queue like Celery or RQ.
+
+async - lets do this in background, dont block the main thread, and let user do what they want to do.
+'''

@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 import os
 import json
 import requests
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import BaseModel, Field # used to strictly define the expected output format of the model.
+from typing import Optional # for optional fields in the output format
 
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
@@ -29,9 +29,12 @@ available_tools = {
     "get_weather": get_weather
 }
 
+'''
+what pydantic does is :- 
+'''
 class MyOutputFormat(BaseModel):
     STEP: str = Field(..., description="The current step in the reasoning process")
-    CONTENT: Optional[str] = Field(None, description="The content of the response or thought")
+    CONTENT: Optional[str] = Field(None, description="The content of the response or thought") # optional[str] means it can be str or None.. and the default is None Field(None, ..)
     TOOL: Optional[str] = Field(None, description="The tool being used, if applicable")
     INPUT: Optional[str] = Field(None, description="The input to the tool, if applicable")
     OUTPUT: Optional[str] = Field(None, description="The output from the tool, if applicable")
@@ -61,18 +64,20 @@ User: solve the math problem: If a train travels at 60 miles per hour for 2 hour
 Assistant: {{
 "STEP": "START",
 "CONTENT": "the user is talking about train speed and time. and want to know the distance."
-
+{{
 "STEP": "PLAN",
 "CONTENT": "the inputs are speed = 60 miles/hour and time = 2 hours."
-
+}}
+{{
 "STEP": "PLAN",
 "CONTENT": "as we know, distance = speed * time. so we can calculate distance."
-
+}}
 "STEP": "PLAN",
 "CONTENT": "so, as per the formula, distance = 60 miles/hour * 2 hours = 120 miles."
 
 "STEP": "OUTPUT",
 "CONTENT": "120 miles"
+}}
 
 Example 2:
 User: How's the weather in delhi?
